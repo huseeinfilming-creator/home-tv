@@ -1,86 +1,66 @@
 {
  "home": [
   {
-   "url": "bg/quds-night.jpg",
+   "url": "bg/quds-night.jpg?v=2",
    "title": "القدس ليلاً",
    "phase": "night"
   },
   {
-   "url": "bg/quds-fajr.jpg",
+   "url": "bg/quds-fajr.jpg?v=2",
    "title": "القدس عند الفجر",
    "phase": "fajr"
   },
   {
-   "url": "bg/quds-sunrise.jpg",
+   "url": "bg/quds-sunrise.jpg?v=2",
    "title": "القدس عند الشروق",
    "phase": "sunrise"
   },
   {
-   "url": "bg/quds-dhuhr.jpg",
+   "url": "bg/quds-dhuhr.jpg?v=2",
    "title": "القدس وقت الظهر",
    "phase": "dhuhr"
   },
   {
-   "url": "bg/quds-asr.jpg",
+   "url": "bg/quds-asr.jpg?v=2",
    "title": "القدس وقت العصر",
    "phase": "asr"
   },
   {
-   "url": "bg/quds-maghrib.jpg",
+   "url": "bg/quds-maghrib.jpg?v=2",
    "title": "القدس عند المغرب",
    "phase": "maghrib"
   }
  ],
  "gallery": [
   {
-   "url": "bg/quds-night.jpg",
+   "url": "bg/quds-night.jpg?v=2",
    "title": "القدس ليلاً",
    "phase": "night"
   },
   {
-   "url": "bg/quds-fajr.jpg",
+   "url": "bg/quds-fajr.jpg?v=2",
    "title": "القدس عند الفجر",
    "phase": "fajr"
   },
   {
-   "url": "bg/quds-sunrise.jpg",
+   "url": "bg/quds-sunrise.jpg?v=2",
    "title": "القدس عند الشروق",
    "phase": "sunrise"
   },
   {
-   "url": "bg/quds-dhuhr.jpg",
+   "url": "bg/quds-dhuhr.jpg?v=2",
    "title": "القدس وقت الظهر",
    "phase": "dhuhr"
   },
   {
-   "url": "bg/quds-asr.jpg",
+   "url": "bg/quds-asr.jpg?v=2",
    "title": "القدس وقت العصر",
    "phase": "asr"
   },
   {
-   "url": "bg/quds-maghrib.jpg",
+   "url": "bg/quds-maghrib.jpg?v=2",
    "title": "القدس عند المغرب",
    "phase": "maghrib"
-  },
-  {
-   "url": "bg/quds-dome.jpg",
-   "title": "القدس، قبة الصخرة"
-  },
-  {
-   "url": "bg/quds-bluehour.jpg",
-   "title": "القدس عند الغروب"
-  },
-  {
-   "url": "bg/quds-sunrise.jpg",
-   "title": "القدس عند الشروق"
-  },
-  {
-   "url": "bg/quds-aqsa-dawn.jpg",
-   "title": "ساحة الأقصى فجراً"
-  },
-  {
-   "url": "bg/quds-walls-night.jpg",
-   "title": "سور القدس ليلاً"
   },
   {
    "url": "bg/makkah-night.jpg",

@@ -1,7 +1,7 @@
 /* شاشة البيت — a small TV "system" that runs inside the TV browser.
    Plain ES5 on purpose: the TV browser is old. */
 (function () {
-  var VERSION = '7';
+  var VERSION = '8';
   var $ = function (id) { return document.getElementById(id); };
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }

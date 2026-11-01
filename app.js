@@ -1,7 +1,7 @@
 /* شاشة البيت — a small TV "system" that runs inside the TV browser.
    Plain ES5 on purpose: the TV browser is old. */
 (function () {
-  var VERSION = '5';
+  var VERSION = '6';
   var $ = function (id) { return document.getElementById(id); };
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -296,7 +296,7 @@
     if (current !== 'home' && current !== 'player') focusList.push($('backbtn'));
     for (var i = 0; i < all.length; i++) if (hasClass(all[i], 'f')) focusList.push(all[i]);
     if (!keep || fi >= focusList.length) fi = current === 'home' || focusList.length < 2 ? 0 : 1;
-    for (var k = 0; k < focusList.length; k++) focusList[k].onmouseover = (function (n) { return function () { if (fi !== n) { fi = n; hoverPaint(); } }; })(k);
+    for (var k = 0; k < focusList.length; k++) focusList[k].onmouseover = (function (n) { return function () { if (mouseActive() && fi !== n) { fi = n; hoverPaint(); } }; })(k);
     paintFocus();
   }
   function paintFocus() {
@@ -304,6 +304,14 @@
     var el = focusList[fi]; if (!el) return;
     addClass(el, 'focus'); keepVisible(el);
   }
+  // The TV pointer sits still over the list while the remote scrolls it, which fires mouseover
+  // on whatever slides under it. Only follow the mouse after it has really moved since the last key.
+  var lastKey = 0, lastMove = 0, mx = -1, my = -1;
+  document.onmousemove = function (e) {
+    e = e || window.event;
+    if (Math.abs(e.clientX - mx) + Math.abs(e.clientY - my) > 4) { if (mx > -1) lastMove = new Date().getTime(); mx = e.clientX; my = e.clientY; }
+  };
+  function mouseActive() { return lastMove > lastKey + 50; }
   function hoverPaint() {
     for (var i = 0; i < focusList.length; i++) rmClass(focusList[i], 'focus');
     if (focusList[fi]) addClass(focusList[fi], 'focus');
@@ -472,7 +480,7 @@
   document.onkeydown = function (e) {
     e = e || window.event;
     var c = e.keyCode;
-    idle = 0;
+    idle = 0; lastKey = new Date().getTime();
     if (overlayOn) { hideAdhan(); return stop(e); }
     if (saver) { saver = false; show('home'); return stop(e); }
     if (current === 'player') {

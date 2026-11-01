@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-01T01:36:02Z",
+ "updated": "2026-11-01T01:50:11Z",
  "items": [
   {
    "name": "مشاري العفاسي",
@@ -16,10 +16,6 @@
   {
    "name": "عبدالباسط عبدالصمد",
    "url": "https://backup.qurango.net/radio/abdulbasit_abdulsamad"
-  },
-  {
-   "name": "ترجمة معاني القرآن باللغة الأوردية - عبدالباسط عبدالصمد",
-   "url": "https://backup.qurango.net/radio/translation_quran_urdu_basit"
   },
   {
    "name": "محمد صديق المنشاوي",
@@ -480,6 +476,10 @@
   {
    "name": "أحمد خليل شاهين",
    "url": "https://backup.qurango.net/radio/ahmad_shaheen"
+  },
+  {
+   "name": "عبدالله الموسى",
+   "url": "https://backup.qurango.net/radio/abdullah_almousa"
   }
  ]
 }

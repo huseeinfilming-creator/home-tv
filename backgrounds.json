@@ -1,27 +1,67 @@
 {
  "home": [
   {
-   "url": "bg/quds-dome.jpg",
-   "title": "القدس، قبة الصخرة"
+   "url": "bg/quds-night.jpg",
+   "title": "القدس ليلاً",
+   "phase": "night"
   },
   {
-   "url": "bg/quds-bluehour.jpg",
-   "title": "القدس عند الغروب"
+   "url": "bg/quds-fajr.jpg",
+   "title": "القدس عند الفجر",
+   "phase": "fajr"
   },
   {
    "url": "bg/quds-sunrise.jpg",
-   "title": "القدس عند الشروق"
+   "title": "القدس عند الشروق",
+   "phase": "sunrise"
   },
   {
-   "url": "bg/quds-aqsa-dawn.jpg",
-   "title": "ساحة الأقصى فجراً"
+   "url": "bg/quds-dhuhr.jpg",
+   "title": "القدس وقت الظهر",
+   "phase": "dhuhr"
   },
   {
-   "url": "bg/quds-walls-night.jpg",
-   "title": "سور القدس ليلاً"
+   "url": "bg/quds-asr.jpg",
+   "title": "القدس وقت العصر",
+   "phase": "asr"
+  },
+  {
+   "url": "bg/quds-maghrib.jpg",
+   "title": "القدس عند المغرب",
+   "phase": "maghrib"
   }
  ],
  "gallery": [
+  {
+   "url": "bg/quds-night.jpg",
+   "title": "القدس ليلاً",
+   "phase": "night"
+  },
+  {
+   "url": "bg/quds-fajr.jpg",
+   "title": "القدس عند الفجر",
+   "phase": "fajr"
+  },
+  {
+   "url": "bg/quds-sunrise.jpg",
+   "title": "القدس عند الشروق",
+   "phase": "sunrise"
+  },
+  {
+   "url": "bg/quds-dhuhr.jpg",
+   "title": "القدس وقت الظهر",
+   "phase": "dhuhr"
+  },
+  {
+   "url": "bg/quds-asr.jpg",
+   "title": "القدس وقت العصر",
+   "phase": "asr"
+  },
+  {
+   "url": "bg/quds-maghrib.jpg",
+   "title": "القدس عند المغرب",
+   "phase": "maghrib"
+  },
   {
    "url": "bg/quds-dome.jpg",
    "title": "القدس، قبة الصخرة"

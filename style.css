@@ -18,9 +18,9 @@ body { color: #F2EDE3; font-family: 'Rawasi', 'Readex Pro', Tahoma, Arial, sans-
 /* ---------- photography layer ---------- */
 .bg, .bg-img, .bg-shade { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
 .bg-img { background-size: cover; background-position: center; opacity: 0; transition: opacity 2.4s ease; -webkit-transition: opacity 2.4s ease; }
-.bg-img.show { opacity: 1; animation: drift 46s linear forwards; -webkit-animation: drift 46s linear forwards; }
-@keyframes drift { from { transform: scale(1.02) translate(0, 0); } to { transform: scale(1.14) translate(-30px, -14px); } }
-@-webkit-keyframes drift { from { -webkit-transform: scale(1.02) translate(0, 0); } to { -webkit-transform: scale(1.14) translate(-30px, -14px); } }
+.bg-img.show { opacity: 1; animation: drift 90s ease-out forwards; -webkit-animation: drift 90s ease-out forwards; }
+@keyframes drift { from { transform: scale(1.1) translate(20px, 8px); } to { transform: scale(1.02) translate(0, 0); } }
+@-webkit-keyframes drift { from { -webkit-transform: scale(1.1) translate(20px, 8px); } to { -webkit-transform: scale(1.02) translate(0, 0); } }
 .bg-shade { background: linear-gradient(to left, rgba(15,28,34,0.88) 0%, rgba(15,28,34,0.55) 45%, rgba(15,28,34,0.35) 100%), linear-gradient(to top, rgba(15,28,34,0.95) 0%, rgba(15,28,34,0) 45%); transition: opacity 0.8s; }
 .bg.dim .bg-shade { background: rgba(15,28,34,0.9); }
 .bg.clear .bg-shade { background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 40%); }

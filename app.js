@@ -1,7 +1,7 @@
 /* شاشة البيت — a small TV "system" that runs inside the TV browser.
    Plain ES5 on purpose: the TV browser is old. */
 (function () {
-  var VERSION = '6';
+  var VERSION = '7';
   var $ = function (id) { return document.getElementById(id); };
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -199,11 +199,22 @@
   // ---------- background photography ----------
   // home: the Jerusalem set (in order). photos / screensaver: generated set + Wikimedia photos.
   var homeBg = [], gallery = [], wiki = [], hi = 0, gi = 0, bgA = true, bgT = null;
-  function nextBg() {
-    var list = current === 'photos' ? gallery : homeBg;
-    if (!list.length) list = homeBg.length ? homeBg : gallery;
-    if (!list.length) return;
-    var p = current === 'photos' ? list[gi++ % list.length] : list[hi++ % list.length];
+  // home: one Jerusalem photo per part of the day, held until the next prayer period begins.
+  var shownUrl = '';
+  function dayPhase() {
+    if (!times) return 'night';
+    var n = istNow(), cur = n.getHours() * 60 + n.getMinutes();
+    var fa = toMin(times.Fajr), su = toMin(times.Sunrise), as = toMin(times.Asr), ma = toMin(times.Maghrib), is = toMin(times.Isha);
+    if (cur >= fa && cur < su) return 'fajr';
+    if (cur >= su && cur < su + 90) return 'sunrise';
+    if (cur >= su + 90 && cur < as) return 'dhuhr';
+    if (cur >= as && cur < ma) return 'asr';
+    if (cur >= ma && cur < is) return 'maghrib';
+    return 'night';
+  }
+  function showBg(p) {
+    if (!p || p.url === shownUrl) return;
+    shownUrl = p.url;
     var on = bgA ? $('bg-a') : $('bg-b'), off = bgA ? $('bg-b') : $('bg-a'), img = new Image();
     img.onload = function () {
       rmClass(on, 'show'); void on.offsetWidth;
@@ -212,13 +223,19 @@
     };
     img.src = p.url;
   }
+  function nextBg() {
+    if (current === 'photos') { if (gallery.length) showBg(gallery[gi++ % gallery.length]); return; }
+    var ph = dayPhase(), pick = null;
+    for (var i = 0; i < homeBg.length; i++) if (homeBg[i].phase === ph) { pick = homeBg[i]; break; }
+    showBg(pick || homeBg[0]);
+  }
   function bgEvery(ms) { clearInterval(bgT); bgT = setInterval(nextBg, ms); }
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function mergeGallery(base) { gallery = base.concat(shuffle(wiki.slice(0))); }
   getJSON('backgrounds.json?h=' + Math.floor(new Date().getTime() / 600000), function (d) {
     var base = [];
     if (d) { homeBg = d.home || []; base = shuffle((d.gallery || []).slice(0)); }
-    mergeGallery(base); nextBg(); bgEvery(45000);
+    mergeGallery(base); nextBg(); bgEvery(60000);
     data('photos.json', function (w) { wiki = w && w.items ? w.items : []; mergeGallery(base); });
   });
   function bgMode(m) { var b = $('bg'); rmClass(b, 'dim'); rmClass(b, 'clear'); if (m) addClass(b, m); }
@@ -276,8 +293,8 @@
     addClass($(SCREEN[name]), 'on');
     current = name;
     bgMode(name === 'home' ? '' : name === 'photos' ? 'clear' : 'dim');
-    bgEvery(name === 'photos' ? 12000 : 45000);
-    if (name === 'photos') nextBg();
+    bgEvery(name === 'photos' ? 12000 : 60000);
+    nextBg();
     if (name !== 'photos') saver = false;
     if (name === 'quran') buildQuran();
     if (name === 'live') buildLive();

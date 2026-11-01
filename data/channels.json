@@ -1,0 +1,235 @@
+{
+ "updated": "2026-11-01T01:30:20Z",
+ "items": [
+  {
+   "name": "Al Jazeera 2",
+   "url": "https://live-hls-web-aja2-gcp.thehlive.com/AJA2/index.m3u8",
+   "logo": "https://i.imgur.com/miq8O1Q.png",
+   "flags": []
+  },
+  {
+   "name": "Al Jazeera",
+   "url": "https://live-hls-apps-aja-fa.getaj.net/AJA/01.m3u8",
+   "logo": "https://i.imgur.com/7bRVpnu.png",
+   "flags": []
+  },
+  {
+   "name": "Al Jazeera Mubasher 24",
+   "url": "https://live-hls-apps-ajm24-fa.getaj.net/AJM24/index.m3u8",
+   "logo": "https://i.imgur.com/LMCcIZ2.png",
+   "flags": []
+  },
+  {
+   "name": "Al Jazeera Mubasher",
+   "url": "https://live-hls-apps-ajm-fa.getaj.net/AJM/index.m3u8",
+   "logo": "https://i.imgur.com/X80DQvF.png",
+   "flags": []
+  },
+  {
+   "name": "Al Jazeera Mubasher Broadcast 2",
+   "url": "https://live-hls-apps-ajm2-fa.getaj.net/AJM2/index.m3u8",
+   "logo": "https://i.imgur.com/nJmi6G6.png",
+   "flags": []
+  },
+  {
+   "name": "Al Jazeera Documentary",
+   "url": "https://live-hls-apps-ajd-fa.getaj.net/AJD/index.m3u8",
+   "logo": "https://i.imgur.com/5dNJlLo.png",
+   "flags": [
+    "geo"
+   ]
+  },
+  {
+   "name": "Al Arabiya Business",
+   "url": "https://live.alarabiya.net/alarabiapublish/aswaaq.smil/playlist.m3u8",
+   "logo": "https://shahid.mbc.net/mediaObject/73142189-aeca-4f65-8977-d769c91e2573?height=auto&width=600&croppingPoint=&version=1&type=png",
+   "flags": []
+  },
+  {
+   "name": "Al Arabiya Programs",
+   "url": "https://live.alarabiya.net/alarabiapublish/aaprograms.smil/playlist.m3u8",
+   "logo": "https://i.imgur.com/Hoc3cfO.png",
+   "flags": []
+  },
+  {
+   "name": "Al Hadath",
+   "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-hadath/2ff87ec4c2f3ede35295a20637d9f8fd/index.m3u8",
+   "logo": "https://i.imgur.com/De4SEWE.png",
+   "flags": []
+  },
+  {
+   "name": "Asharq Discovery",
+   "url": "https://svs.itworkscdn.net/asharqdiscoverylive/asharqd.smil/playlist_dvr.m3u8",
+   "logo": "https://i.imgur.com/Czxi7yk.png",
+   "flags": []
+  },
+  {
+   "name": "Asharq Documentary",
+   "url": "https://svs.itworkscdn.net/asharqdocumentarylive/asharqdocumentary.smil/playlist_dvr.m3u8",
+   "logo": "https://i.imgur.com/v6VsFEt.png",
+   "flags": []
+  },
+  {
+   "name": "Asharq News",
+   "url": "https://live-news.asharq.com/asharq.m3u8",
+   "logo": "https://i.imgur.com/bqRC3sl.png",
+   "flags": []
+  },
+  {
+   "name": "Asharq Radio",
+   "url": "https://svs.itworkscdn.net/asharqradiovlive/asharqradiov/playlist.m3u8",
+   "logo": "https://i.imgur.com/M6K8cD3.jpeg",
+   "flags": []
+  },
+  {
+   "name": "Sky News Arabia",
+   "url": "https://live-stream.skynewsarabia.com/c-horizontal-channel/horizontal-stream/index.m3u8",
+   "logo": "https://i.imgur.com/SvjU4h6.png",
+   "flags": []
+  },
+  {
+   "name": "Sky News Arabia SD",
+   "url": "https://stream.skynewsarabia.com/ott/ott.m3u8",
+   "logo": "https://i.imgur.com/SvjU4h6.png",
+   "flags": []
+  },
+  {
+   "name": "Sky News Arabia Vertical",
+   "url": "https://live-stream.skynewsarabia.com/c-vertical-channel/vertical-stream/index.m3u8",
+   "logo": "https://i.imgur.com/FjtzQQs.png",
+   "flags": []
+  },
+  {
+   "name": "Sky News Arabia Vertical SD",
+   "url": "https://stream.skynewsarabia.com/vertical/vertical.m3u8",
+   "logo": "https://i.imgur.com/FjtzQQs.png",
+   "flags": []
+  },
+  {
+   "name": "TRT Arabi",
+   "url": "https://tv-trtarabi.medya.trt.com.tr/master.m3u8",
+   "logo": "https://i.imgur.com/dEfI2M9.png",
+   "flags": []
+  },
+  {
+   "name": "Al Araby TV 2",
+   "url": "https://live.kwikmotion.com/alaraby2live/alaraby2.smil/playlist.m3u8",
+   "logo": "https://i.imgur.com/Gp5mNea.png",
+   "flags": []
+  },
+  {
+   "name": "Al Araby TV",
+   "url": "https://live.kwikmotion.com/alaraby1live/alaraby_abr/playlist.m3u8",
+   "logo": "https://i.imgur.com/YMqWEe4.png",
+   "flags": []
+  },
+  {
+   "name": "France 24 Arabic",
+   "url": "https://live.france24.com/hls/live/2037222-b/F24_AR_HI_HLS/master_5000.m3u8",
+   "logo": "https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_FRANCE_24/images/LOGO_HD/image.png",
+   "flags": []
+  },
+  {
+   "name": "DW Arabic",
+   "url": "https://dwamdstream103.akamaized.net/hls/live/2015526/dwstream103/master.m3u8",
+   "logo": "https://i.imgur.com/8MRNFb9.png",
+   "flags": []
+  },
+  {
+   "name": "Syria TV",
+   "url": "https://live.kwikmotion.com/syriatvlive/syriatv.smil/playlist_dvr.m3u8",
+   "logo": "https://i.imgur.com/FjuVuXF.jpeg",
+   "flags": []
+  },
+  {
+   "name": "Al Quran Al Kareem TV",
+   "url": "http://m.live.net.sa:1935/live/quran/gmswf.m3u8",
+   "logo": "https://aloula.faulio.com/storage/mediagallery/da/6c/fullhd_7eaf7e165c4cad5b3a45eff65d2011e18be5d670.png",
+   "flags": []
+  },
+  {
+   "name": "Alquran",
+   "url": "https://ktvlive.online/stream/hls/ch1.m3u8",
+   "logo": "https://i.imgur.com/lqVwrAF.png",
+   "flags": []
+  },
+  {
+   "name": "Bahrain Quran",
+   "url": "https://5c7b683162943.streamlock.net/live/ngrp:bahrainquran_all/playlist.m3u8",
+   "logo": "https://i.imgur.com/er5hOK4.png",
+   "flags": []
+  },
+  {
+   "name": "Holy Quran Radio",
+   "url": "https://live.kwikmotion.com/sbrksaquranradiolive/srpksaquranradio/playlist.m3u8",
+   "logo": "https://aloula.faulio.com/storage/mediagallery/14/da/fullhd_823bc2fe722ede75410492d57fd6c201208b4224.png",
+   "flags": []
+  },
+  {
+   "name": "Holy Quran Radio Nablus",
+   "url": "http://streaming.zaytonatube.com:8080/holyquran/holyquran/video.m3u8",
+   "logo": "https://quran-radio.com/assets/images/site/quran-radio-logo-h-rtl.png",
+   "flags": []
+  },
+  {
+   "name": "Iqraa Quran",
+   "url": "https://playlist.fasttvcdn.com/pl/dlkqw1ftuvuuzkcb4pxdcg/Iqraafasttv2/playlist.m3u8",
+   "logo": "https://i.imgur.com/HPVsIa4.png",
+   "flags": []
+  },
+  {
+   "name": "Qatar TV The Holy Quran",
+   "url": "https://qatartv.akamaized.net/hls/live/20000612/qtvquran/master.m3u8",
+   "logo": "https://www.qmc.qa/img/LiveChannels/1ca67a44-9290-4b2a-8a16-d8c6e2260816.jpg",
+   "flags": []
+  },
+  {
+   "name": "Sharjah Radio Quran",
+   "url": "https://live.kwikmotion.com/smcquranlive/quranradiolive/playlist.m3u8",
+   "logo": "https://i.imgur.com/MxZlOvc.png",
+   "flags": []
+  },
+  {
+   "name": "Al Sunnah Al Nabawiyah TV",
+   "url": "http://m.live.net.sa:1935/live/sunnah/gmswf.m3u8",
+   "logo": "https://aloula.faulio.com/storage/mediagallery/33/92/fullhd_879e557011826f507a045b4e0b4c3b57ba93edae.png",
+   "flags": []
+  },
+  {
+   "name": "Iqraa Africa & Europe",
+   "url": "https://playlist.fasttvcdn.com/pl/dlkqw1ftuvuuzkcb4pxdcg/Iqraafasttv1/playlist.m3u8",
+   "logo": "https://i.imgur.com/nUlZvSe.png",
+   "flags": []
+  },
+  {
+   "name": "Iqraa Arabic",
+   "url": "https://playlist.fasttvcdn.com/pl/dlkqw1ftuvuuzkcb4pxdcg/Iqraafasttv3/playlist.m3u8",
+   "logo": "https://i.imgur.com/HPVsIa4.png",
+   "flags": []
+  },
+  {
+   "name": "Majid Al Mohandis",
+   "url": "https://shd-amg-fast.edgenextcdn.net/tx019/playlist.m3u8",
+   "logo": "https://i.discogs.com/Fk9Bm8gTYJYeVXIJKX-EOGmYQ90sVQPtkIW5ZK4fydo/rs:fit/g:sm/q:90/h:372/w:412/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9MLTE2OTY4/MzMtMTU2ODk0NjI5/MC01Njk2LmpwZWc.jpeg",
+   "flags": []
+  },
+  {
+   "name": "SBC",
+   "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-sbc/90e09c0c28db26435799b4a14892a167/index.m3u8",
+   "logo": "https://i.imgur.com/9JSQglj.png",
+   "flags": []
+  },
+  {
+   "name": "Rotana Radio Jordan Studio",
+   "url": "http://45.63.116.205/hls/stream1.m3u8",
+   "logo": "https://i.imgur.com/xGDjlp5.png",
+   "flags": []
+  },
+  {
+   "name": "Rotana Tarab Jordan City View",
+   "url": "http://45.63.116.205/hls3/stream1.m3u8",
+   "logo": "https://i.imgur.com/NjgOBts.png",
+   "flags": []
+  }
+ ]
+}

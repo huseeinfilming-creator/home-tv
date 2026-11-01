@@ -1,7 +1,7 @@
 /* شاشة البيت — a small TV "system" that runs inside the TV browser.
    Plain ES5 on purpose: the TV browser is old. */
 (function () {
-  var VERSION = '8';
+  var VERSION = '9';
   var $ = function (id) { return document.getElementById(id); };
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -292,6 +292,7 @@
     void $(SCREEN[name]).offsetWidth;
     addClass($(SCREEN[name]), 'on');
     current = name;
+    if (typeof edgeScroll === 'function') edgeScroll(-9999);
     bgMode(name === 'home' ? '' : name === 'photos' ? 'clear' : 'dim');
     bgEvery(name === 'photos' ? 12000 : 60000);
     nextBg();
@@ -327,7 +328,9 @@
   document.onmousemove = function (e) {
     e = e || window.event;
     if (Math.abs(e.clientX - mx) + Math.abs(e.clientY - my) > 4) { if (mx > -1) lastMove = new Date().getTime(); mx = e.clientX; my = e.clientY; }
+    if (typeof edgeScroll === 'function') edgeScroll(e.clientY);
   };
+  document.onmouseout = function (e) { e = e || window.event; if (!e.relatedTarget && typeof edgeScroll === 'function') edgeScroll(-9999); };
   function mouseActive() { return lastMove > lastKey + 50; }
   function hoverPaint() {
     for (var i = 0; i < focusList.length; i++) rmClass(focusList[i], 'focus');
@@ -491,6 +494,39 @@
     else if (h && h !== current && SCREEN[h] && h !== 'player') { if (current === 'player') stopVideo(); show(h, true); }
   };
   $('backbtn').onclick = function () { back(); };
+
+  // ---------- scrolling for the TV pointer ----------
+  function scrollBox() {
+    if (current === 'quran') return $('quran-list').parentNode;
+    if (current === 'live') return $('live-list').parentNode;
+    if (current === 'news' || current === 'sports') return $('news-list').parentNode;
+    return null;
+  }
+  function updatePager() {
+    var b = scrollBox(), pg = $('pager');
+    if (!b) { rmClass(pg, 'on'); return; }
+    addClass(pg, 'on');
+    var max = b.scrollHeight - b.clientHeight;
+    if (b.scrollTop > 2) addClass($('pg-up'), 'can'); else rmClass($('pg-up'), 'can');
+    if (b.scrollTop < max - 2) addClass($('pg-down'), 'can'); else rmClass($('pg-down'), 'can');
+  }
+  function page(dir) { var b = scrollBox(); if (!b) return; smoothTo(b, Math.max(0, Math.min(b.scrollHeight - b.clientHeight, b.scrollTop + dir * b.clientHeight * 0.8))); }
+  $('pg-up').onclick = function () { page(-1); };
+  $('pg-down').onclick = function () { page(1); };
+  // edge scrolling: keep the pointer near the bottom (or top) of a list and it moves by itself
+  var edgeDir = 0, edgeT = null;
+  function edgeScroll(y) {
+    var b = scrollBox(), dir = 0;
+    if (b) {
+      var r = b.getBoundingClientRect(), zone = Math.max(60, r.height * 0.14);
+      if (y > r.bottom - zone && y < r.bottom + 120) dir = 1;
+      else if (y < r.top + zone && y > r.top - 160) dir = -1;
+    }
+    if (dir === edgeDir) return;
+    edgeDir = dir; clearInterval(edgeT);
+    if (dir) edgeT = setInterval(function () { var bb = scrollBox(); if (!bb) { clearInterval(edgeT); edgeDir = 0; return; } clearInterval(smoothT); bb.scrollTop += edgeDir * 14; updatePager(); }, 16);
+  }
+  setInterval(updatePager, 400);
 
   // ---------- keys ----------
   var idle = 0, saver = false;

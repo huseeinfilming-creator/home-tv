@@ -154,6 +154,20 @@ body { color: #F2EDE3; font-family: 'Rawasi', 'Readex Pro', Tahoma, Arial, sans-
 #s-player ~ .backbtn.on { }
 .f, .backbtn { cursor: pointer; }
 
+/* page up / down for the TV pointer (the remote moves a cursor, so lists need something to press) */
+.pager { position: absolute; left: 40px; top: 230px; bottom: 40px; width: 96px; display: none; }
+.pager.on { display: block; }
+.pg { position: absolute; left: 0; width: 96px; height: 96px; border-radius: 50%; background: rgba(242,237,227,0.14); border: 1.5px solid rgba(242,237,227,0.3); cursor: pointer;
+  opacity: 0.25; transition: opacity 0.2s, background 0.2s, transform 0.25s cubic-bezier(.34,1.56,.64,1); }
+.pg.can { opacity: 1; }
+.pg:hover, .pg.hot { background: #F2EDE3; transform: scale(1.1); -webkit-transform: scale(1.1); }
+.pg svg { width: 48px; height: 48px; margin: 24px; fill: none; stroke: #F2EDE3; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.pg:hover svg path, .pg.hot svg path { stroke: #0F1C22; }
+.pg.up { top: 0; }
+.pg.down { bottom: 0; }
+/* lists sit clear of the pager */
+#s-live .s-body, #s-news .s-body { left: 160px; }
+
 /* photos / screensaver */
 .ph-clock { position: absolute; right: 110px; bottom: 90px; font-family: 'Readex Pro', sans-serif; font-weight: 200; font-size: 170px; line-height: 1; direction: ltr; }
 .ph-clock small { display: block; font-family: 'Rawasi', 'Readex Pro', sans-serif; font-size: 32px; font-weight: 300; direction: rtl; text-align: right; color: rgba(242,237,227,0.85); margin-top: 16px; }
@@ -192,3 +206,20 @@ body { color: #F2EDE3; font-family: 'Rawasi', 'Readex Pro', Tahoma, Arial, sans-
 @-webkit-keyframes rise { from { opacity: 0; -webkit-transform: translateY(30px); } to { opacity: 1; -webkit-transform: none; } }
 
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+/* the TV remote drives a mouse pointer: everything reacts to it the same way it reacts to focus */
+.app:hover .ic { background: #F2EDE3; border-color: #F2EDE3; transform: translateY(-14px) scale(1.12); -webkit-transform: translateY(-14px) scale(1.12); }
+.app:hover .ic svg * { stroke: #0F1C22; }
+.app:hover .ic svg .fill { fill: #0F1C22; }
+.app:hover .lb { opacity: 1; transform: none; -webkit-transform: none; }
+.reciter:hover { background: #F2EDE3; transform: translateX(-12px); -webkit-transform: translateX(-12px); }
+.reciter:hover .rn { color: #0F1C22; }
+.reciter:hover .rs { color: #4C5D62; }
+.chan:hover .lg { transform: translateY(-10px) scale(1.08); -webkit-transform: translateY(-10px) scale(1.08); box-shadow: 0 0 0 4px #86D6BC; }
+.chan:hover .cn { color: #F2EDE3; }
+.story:hover { background: rgba(242,237,227,0.1); transform: translateX(-12px); -webkit-transform: translateX(-12px); }
+.backbtn:hover { background: #F2EDE3; color: #0F1C22; transform: scale(1.08); -webkit-transform: scale(1.08); }
+.backbtn:hover svg path { stroke: #0F1C22; }
+.app, .reciter, .chan, .story, .backbtn, .pg { cursor: pointer; }
+/* a press answers with a quick dip */
+.app:active .ic, .chan:active .lg, .reciter:active, .story:active, .backbtn:active, .pg:active { transform: scale(0.94); -webkit-transform: scale(0.94); transition-duration: 0.08s; }

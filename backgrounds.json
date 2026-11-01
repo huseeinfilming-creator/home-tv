@@ -1,0 +1,66 @@
+{
+ "home": [
+  {
+   "url": "bg/quds-dome.jpg",
+   "title": "القدس، قبة الصخرة"
+  },
+  {
+   "url": "bg/quds-bluehour.jpg",
+   "title": "القدس عند الغروب"
+  },
+  {
+   "url": "bg/quds-sunrise.jpg",
+   "title": "القدس عند الشروق"
+  },
+  {
+   "url": "bg/quds-aqsa-dawn.jpg",
+   "title": "ساحة الأقصى فجراً"
+  },
+  {
+   "url": "bg/quds-walls-night.jpg",
+   "title": "سور القدس ليلاً"
+  }
+ ],
+ "gallery": [
+  {
+   "url": "bg/quds-dome.jpg",
+   "title": "القدس، قبة الصخرة"
+  },
+  {
+   "url": "bg/quds-bluehour.jpg",
+   "title": "القدس عند الغروب"
+  },
+  {
+   "url": "bg/quds-sunrise.jpg",
+   "title": "القدس عند الشروق"
+  },
+  {
+   "url": "bg/quds-aqsa-dawn.jpg",
+   "title": "ساحة الأقصى فجراً"
+  },
+  {
+   "url": "bg/quds-walls-night.jpg",
+   "title": "سور القدس ليلاً"
+  },
+  {
+   "url": "bg/makkah-night.jpg",
+   "title": "المسجد الحرام"
+  },
+  {
+   "url": "bg/madinah-bluehour.jpg",
+   "title": "المسجد النبوي"
+  },
+  {
+   "url": "bg/istanbul-goldenhorn.jpg",
+   "title": "إسطنبول، القرن الذهبي"
+  },
+  {
+   "url": "bg/istanbul-bosphorus.jpg",
+   "title": "البوسفور فجراً"
+  },
+  {
+   "url": "bg/desert-dawn.jpg",
+   "title": "الصحراء عند الفجر"
+  }
+ ]
+}

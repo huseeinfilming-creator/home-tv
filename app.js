@@ -1,7 +1,7 @@
 /* شاشة البيت — a small TV "system" that runs inside the TV browser.
    Plain ES5 on purpose: the TV browser is old. */
 (function () {
-  var VERSION = '4';
+  var VERSION = '5';
   var $ = function (id) { return document.getElementById(id); };
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -197,20 +197,30 @@
   }
 
   // ---------- background photography ----------
-  var photos = [], pi = 0, bgA = true, bgT = null;
+  // home: the Jerusalem set (in order). photos / screensaver: generated set + Wikimedia photos.
+  var homeBg = [], gallery = [], wiki = [], hi = 0, gi = 0, bgA = true, bgT = null;
   function nextBg() {
-    if (!photos.length) return;
-    var p = photos[pi++ % photos.length], on = bgA ? $('bg-a') : $('bg-b'), off = bgA ? $('bg-b') : $('bg-a'), img = new Image();
+    var list = current === 'photos' ? gallery : homeBg;
+    if (!list.length) list = homeBg.length ? homeBg : gallery;
+    if (!list.length) return;
+    var p = current === 'photos' ? list[gi++ % list.length] : list[hi++ % list.length];
+    var on = bgA ? $('bg-a') : $('bg-b'), off = bgA ? $('bg-b') : $('bg-a'), img = new Image();
     img.onload = function () {
       rmClass(on, 'show'); void on.offsetWidth;
       on.style.backgroundImage = 'url("' + p.url + '")'; addClass(on, 'show'); rmClass(off, 'show'); bgA = !bgA;
-      $('ph-credit').innerHTML = esc('Photo: ' + (p.author || 'Wikimedia Commons') + ' / ' + p.license + ' / Wikimedia Commons');
+      $('ph-credit').innerHTML = p.license ? esc('Photo: ' + (p.author || 'Wikimedia Commons') + ' / ' + p.license + ' / Wikimedia Commons') : esc(p.title || '');
     };
     img.src = p.url;
   }
   function bgEvery(ms) { clearInterval(bgT); bgT = setInterval(nextBg, ms); }
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-  data('photos.json', function (d) { photos = d && d.items ? shuffle(d.items) : []; nextBg(); bgEvery(45000); });
+  function mergeGallery(base) { gallery = base.concat(shuffle(wiki.slice(0))); }
+  getJSON('backgrounds.json?h=' + Math.floor(new Date().getTime() / 600000), function (d) {
+    var base = [];
+    if (d) { homeBg = d.home || []; base = shuffle((d.gallery || []).slice(0)); }
+    mergeGallery(base); nextBg(); bgEvery(45000);
+    data('photos.json', function (w) { wiki = w && w.items ? w.items : []; mergeGallery(base); });
+  });
   function bgMode(m) { var b = $('bg'); rmClass(b, 'dim'); rmClass(b, 'clear'); if (m) addClass(b, m); }
 
   // ---------- icons ----------
@@ -248,10 +258,18 @@
   function openApp(a) { if (a.type === 'url') { window.location.href = a.target; return; } show(a.target); }
 
   // ---------- screens + focus engine ----------
-  var current = 'home', focusList = [], fi = 0, homeFi = 0;
+  var current = 'home', focusList = [], fi = 0, homeFi = 0, navDepth = 0;
   var SCREEN = { home: 's-home', quran: 's-quran', live: 's-live', news: 's-news', sports: 's-news', photos: 's-photos', player: 's-player' };
-  function show(name) {
+  function show(name, fromHash) {
     if (current === 'home') homeFi = fi;
+    if (!fromHash) {
+      var want = name === 'home' ? '' : name, have = (location.hash || '').replace('#', '');
+      if (have !== want) {
+        if (name === 'home') { if (navDepth > 0) { navDepth--; history.back(); } else { try { history.replaceState(null, '', location.pathname); } catch (e) { location.hash = ''; } } }
+        else { navDepth++; location.hash = want; }
+      }
+    }
+    var bb = $('backbtn'); if (name === 'home' || name === 'player') rmClass(bb, 'on'); else addClass(bb, 'on');
     var secs = document.getElementsByTagName('section');
     for (var i = 0; i < secs.length; i++) rmClass(secs[i], 'on');
     void $(SCREEN[name]).offsetWidth;
@@ -264,25 +282,31 @@
     if (name === 'quran') buildQuran();
     if (name === 'live') buildLive();
     if (name === 'news' || name === 'sports') buildNews(name);
-    fi = name === 'home' ? homeFi : 0;
+    fi = name === 'home' ? homeFi : 1;
     setFocusList(true);
   }
   function back() {
     if (overlayOn) { hideAdhan(); return; }
-    if (current === 'player') { stopVideo(); show('live'); return; }
+    if (current === 'player') { stopVideo(); if (navDepth > 0) { navDepth--; history.back(); } else show('live'); return; }
     if (current !== 'home') show('home');
   }
   function setFocusList(keep) {
     var all = $(SCREEN[current]).getElementsByTagName('*');
     focusList = [];
+    if (current !== 'home' && current !== 'player') focusList.push($('backbtn'));
     for (var i = 0; i < all.length; i++) if (hasClass(all[i], 'f')) focusList.push(all[i]);
-    if (!keep || fi >= focusList.length) fi = 0;
+    if (!keep || fi >= focusList.length) fi = current === 'home' || focusList.length < 2 ? 0 : 1;
+    for (var k = 0; k < focusList.length; k++) focusList[k].onmouseover = (function (n) { return function () { if (fi !== n) { fi = n; hoverPaint(); } }; })(k);
     paintFocus();
   }
   function paintFocus() {
     for (var i = 0; i < focusList.length; i++) rmClass(focusList[i], 'focus');
     var el = focusList[fi]; if (!el) return;
     addClass(el, 'focus'); keepVisible(el);
+  }
+  function hoverPaint() {
+    for (var i = 0; i < focusList.length; i++) rmClass(focusList[i], 'focus');
+    if (focusList[fi]) addClass(focusList[fi], 'focus');
   }
   function keepVisible(el) {
     if (current === 'home') {
@@ -291,10 +315,18 @@
       return;
     }
     var inner = el.parentNode; if (!inner || !hasClass(inner, 'scroll-in')) return;
-    var box = inner.parentNode.offsetHeight, top = el.offsetTop, cur = -parseInt(inner.style.top || '0', 10);
-    if (top < cur + 20) cur = Math.max(0, top - 20);
-    else if (top + el.offsetHeight > cur + box - 30) cur = top + el.offsetHeight - box + 30;
-    inner.style.top = (-cur) + 'px';
+    var box = inner.parentNode, top = el.offsetTop, h = box.clientHeight;
+    if (top < box.scrollTop + 20) smoothTo(box, Math.max(0, top - 20));
+    else if (top + el.offsetHeight > box.scrollTop + h - 30) smoothTo(box, top + el.offsetHeight - h + 30);
+  }
+  var smoothT = null;
+  function smoothTo(box, target) {
+    clearInterval(smoothT);
+    smoothT = setInterval(function () {
+      var d = target - box.scrollTop;
+      if (Math.abs(d) < 2) { box.scrollTop = target; clearInterval(smoothT); return; }
+      box.scrollTop += d * 0.3;
+    }, 16);
   }
   function moveFocus(dir) {
     var a = focusList[fi]; if (!a) return;
@@ -418,7 +450,7 @@
       var d = feeds[kind], h = '';
       if (!d) h = '<div class="story"><div class="st">عم نجيب آخر العناوين…</div></div>';
       else for (var i = 0; i < d.items.length; i++) h += '<div class="story f' + (i === 0 ? ' lead' : '') + '" data-n="' + i + '"><div class="st">' + esc(d.items[i].title) + '</div><div class="ss">' + esc(d.items[i].source) + '</div></div>';
-      $('news-list').innerHTML = h;
+      $('news-list').innerHTML = h; $('news-list').parentNode.scrollTop = 0;
       if (d && d.updated) { var t = new Date(d.updated); $('news-sub').innerHTML = 'تحدّثت الساعة <span dir="ltr">' + pad((t.getUTCHours() + 3) % 24) + ':' + pad(t.getUTCMinutes()) + '</span>'; }
       var rows = $('news-list').childNodes;
       for (var k = 0; k < rows.length; k++) if (rows[k].getAttribute && rows[k].getAttribute('data-n') !== null) rows[k].onclick = (function (n) { return function () { window.location.href = feeds[kind].items[n].link; }; })(+rows[k].getAttribute('data-n'));
@@ -427,6 +459,13 @@
     draw();
     data(kind + '.json', function (d) { if (d && d.items) { feeds[kind] = d; if (current === kind) draw(); } });
   }
+
+  window.onhashchange = function () {
+    var h = (location.hash || '').replace('#', '');
+    if (h === '' && current !== 'home') { if (current === 'player') stopVideo(); navDepth = 0; show('home', true); }
+    else if (h && h !== current && SCREEN[h] && h !== 'player') { if (current === 'player') stopVideo(); show(h, true); }
+  };
+  $('backbtn').onclick = function () { back(); };
 
   // ---------- keys ----------
   var idle = 0, saver = false;
@@ -473,6 +512,7 @@
   addClass(document.body, 'boot');
   renderApps(); renderDates(); loadTimes(); tick(); showDhikr(true); loadWeather();
   setTimeout(function () { rmClass(document.body, 'boot'); addClass(document.body, 'ready'); }, 120);
+  (function () { var h = (location.hash || '').replace('#', ''); if (h && SCREEN[h] && h !== 'player' && h !== 'home') show(h, true); })();
   setInterval(tick, 1000);
   setInterval(function () { showDhikr(false); }, 25000);
   setInterval(loadWeather, 30 * 60000);

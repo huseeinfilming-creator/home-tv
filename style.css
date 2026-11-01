@@ -96,8 +96,9 @@ body { color: #F2EDE3; font-family: 'Rawasi', 'Readex Pro', Tahoma, Arial, sans-
 .s-head { position: absolute; right: 110px; left: 110px; top: 70px; }
 .s-head h1 { font-size: 64px; font-weight: 500; }
 .s-head p { font-size: 26px; color: #A7B6B9; margin-top: 6px; }
-.s-body { position: absolute; right: 90px; left: 90px; top: 220px; bottom: 30px; overflow: hidden; }
-.scroll-in { position: relative; top: 0; padding: 16px 20px; transition: top 0.35s cubic-bezier(.2,.8,.2,1); -webkit-transition: top 0.35s cubic-bezier(.2,.8,.2,1); }
+.s-body { position: absolute; right: 90px; left: 90px; top: 220px; bottom: 30px; overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.s-body::-webkit-scrollbar, .q-list::-webkit-scrollbar { display: none; width: 0; }
+.scroll-in { position: relative; padding: 16px 20px 60px; }
 .f { transition: transform 0.28s cubic-bezier(.34,1.56,.64,1), background 0.2s, color 0.2s; -webkit-transition: -webkit-transform 0.28s cubic-bezier(.34,1.56,.64,1), background 0.2s; }
 
 /* quran: listening room */
@@ -116,7 +117,7 @@ body { color: #F2EDE3; font-family: 'Rawasi', 'Readex Pro', Tahoma, Arial, sans-
 @keyframes eq { from { transform: scaleY(0.15); } to { transform: scaleY(1); } }
 @-webkit-keyframes eq { from { -webkit-transform: scaleY(0.15); } to { -webkit-transform: scaleY(1); } }
 .l-hint { position: absolute; bottom: 60px; font-size: 22px; color: #A7B6B9; }
-.q-list { position: absolute; right: 90px; top: 50px; bottom: 30px; width: 900px; overflow: hidden; }
+.q-list { position: absolute; right: 90px; top: 50px; bottom: 30px; width: 900px; overflow-x: hidden; overflow-y: auto; scrollbar-width: none; }
 .reciter { display: block; padding: 20px 34px; margin-bottom: 8px; border-radius: 22px; }
 .reciter .rn { font-size: 36px; font-weight: 400; }
 .reciter .rs { font-size: 22px; color: #A7B6B9; margin-top: 2px; }
@@ -141,6 +142,17 @@ body { color: #F2EDE3; font-family: 'Rawasi', 'Readex Pro', Tahoma, Arial, sans-
 .story.lead .st { font-size: 54px; line-height: 1.35; font-weight: 500; }
 .story.lead { margin-bottom: 18px; }
 .story.focus { background: rgba(242,237,227,0.1); transform: translateX(-12px); -webkit-transform: translateX(-12px); }
+
+/* back button: on every page except home */
+.backbtn { position: absolute; left: 96px; top: 70px; display: none; padding: 16px 30px 16px 34px; border-radius: 40px; background: rgba(242,237,227,0.12); border: 1.5px solid rgba(242,237,227,0.25); font-size: 28px; cursor: pointer;
+  transition: transform 0.28s cubic-bezier(.34,1.56,.64,1), background 0.2s; -webkit-transition: -webkit-transform 0.28s cubic-bezier(.34,1.56,.64,1), background 0.2s; }
+.backbtn.on { display: block; }
+.backbtn svg { width: 28px; height: 28px; vertical-align: middle; margin-left: 10px; }
+.backbtn span { vertical-align: middle; }
+.backbtn.focus { background: #F2EDE3; color: #0F1C22; transform: scale(1.08); -webkit-transform: scale(1.08); }
+.backbtn.focus svg path { stroke: #0F1C22; }
+#s-player ~ .backbtn.on { }
+.f, .backbtn { cursor: pointer; }
 
 /* photos / screensaver */
 .ph-clock { position: absolute; right: 110px; bottom: 90px; font-family: 'Readex Pro', sans-serif; font-weight: 200; font-size: 170px; line-height: 1; direction: ltr; }

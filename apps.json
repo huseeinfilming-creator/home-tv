@@ -1,0 +1,12 @@
+{
+ "note": "متجر تطبيقات شاشة البيت: كل عنصر بيظهر كأيقونة بالشاشة الرئيسية. type=section يفتح قسم داخلي، type=url يفتح موقع.",
+ "items": [
+  { "id": "quran",   "name": "القرآن الكريم", "icon": "quran",  "type": "section", "target": "quran" },
+  { "id": "live",    "name": "قنوات مباشرة",  "icon": "live",   "type": "section", "target": "live" },
+  { "id": "news",    "name": "الأخبار",       "icon": "news",   "type": "section", "target": "news" },
+  { "id": "sports",  "name": "الرياضة",       "icon": "ball",   "type": "section", "target": "sports" },
+  { "id": "photos",  "name": "الصور",         "icon": "photo",  "type": "section", "target": "photos" },
+  { "id": "youtube", "name": "يوتيوب",        "icon": "play",   "type": "url",     "target": "https://www.youtube.com/tv" },
+  { "id": "google",  "name": "بحث",           "icon": "search", "type": "url",     "target": "https://www.google.com" }
+ ]
+}

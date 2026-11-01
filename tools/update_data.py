@@ -162,6 +162,7 @@ def build_channels():
 
 
 # ---------------------------------------------------------------- photos (Wikimedia Commons, CC-licensed)
+SKIP_PHOTO = re.compile(r"khalili|cradle|kiblat|qibla|kible|kompas|direction|guru|construction|map|book|page|manuscript|drawing|engraving|1971|museum")
 CATEGORIES = ["Category:Masjid al-Haram", "Category:Kaaba", "Category:Al-Masjid an-Nabawi", "Category:Medina", "Category:Mecca"]
 
 
@@ -189,7 +190,10 @@ def build_photos():
                 lic = strip_tags(meta.get("LicenseShortName", {}).get("value", ""))
                 if not lic or "fair use" in lic.lower():
                     continue
-                url = ii.get("thumburl") or ii.get("url")
+                url = (ii.get("thumburl") or ii.get("url") or "").split("?")[0]
+                fname = urllib.parse.unquote(url.rsplit("/", 1)[-1]).lower()
+                if SKIP_PHOTO.search(fname):
+                    continue
                 if url in seen:
                     continue
                 seen.add(url)
@@ -207,15 +211,18 @@ def build_photos():
 
 # ---------------------------------------------------------------- adhan audio (Wikimedia Commons)
 def build_adhan():
-    if os.path.exists(os.path.join(DATA, "adhan.json")):
-        return
+    path = os.path.join(DATA, "adhan.json")
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            if "?" not in json.load(f).get("url", ""):
+                return
     try:
         d = commons({"action": "query", "list": "search", "srsearch": "adhan filetype:audio", "srnamespace": "6", "srlimit": "20"})
         for r in d.get("query", {}).get("search", []):
             info = commons({"action": "query", "titles": r["title"], "prop": "imageinfo", "iiprop": "url|extmetadata|mime"})
             page = info["query"]["pages"][0]
             ii = (page.get("imageinfo") or [{}])[0]
-            url, mime = ii.get("url", ""), ii.get("mime", "")
+            url, mime = ii.get("url", "").split("?")[0], ii.get("mime", "")
             if not url:
                 continue
             if mime == "audio/mpeg":

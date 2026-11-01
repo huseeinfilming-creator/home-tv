@@ -1,0 +1,108 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #0d0d0c; }
+body { color: #efe6d4; font-family: 'IBM Plex Sans Arabic', Tahoma, Arial, sans-serif; }
+.stage {
+  position: absolute; width: 1920px; height: 1080px; overflow: hidden; transform-origin: top right;
+  background:
+    radial-gradient(1200px 700px at 85% 0%, rgba(176,130,54,0.16), rgba(0,0,0,0) 60%),
+    radial-gradient(900px 600px at 0% 100%, rgba(14,59,49,0.35), rgba(0,0,0,0) 60%),
+    #0d0d0c;
+}
+.screen { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: none; padding: 64px 96px 50px; }
+.screen.on { display: block; }
+.muted { color: #a59c8b; }
+
+/* ---------- home ---------- */
+.top { display: flex; justify-content: space-between; align-items: flex-start; }
+.clock-wrap { display: flex; flex-direction: column; gap: 4px; }
+.greet { font-size: 32px; color: #c9a35a; }
+.clock { font-weight: 700; font-size: 170px; line-height: 1; direction: ltr; text-align: right; letter-spacing: -4px; color: #f6efe1; }
+.clock .sec { font-size: 62px; color: #a59c8b; letter-spacing: 0; margin-left: 10px; }
+.dates { font-size: 32px; margin-top: 8px; }
+.dates span + span:before { content: '·'; margin: 0 16px; color: #6f675a; }
+.side { display: flex; flex-direction: column; align-items: flex-end; gap: 22px; }
+.weather { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.weather .temp { font-size: 104px; font-weight: 700; line-height: 1; direction: ltr; }
+.weather .desc { font-size: 30px; }
+.weather .city { font-size: 24px; color: #a59c8b; }
+.np { font-size: 24px; color: #c9a35a; max-width: 520px; text-align: left; }
+
+.prayers { margin-top: 34px; display: flex; gap: 16px; }
+.p { flex: 1; padding: 18px 10px 20px; border-radius: 20px; text-align: center; background: rgba(255,255,255,0.04); border: 1px solid rgba(239,230,212,0.08); }
+.p .n { font-size: 28px; color: #a59c8b; }
+.p .t { font-size: 48px; font-weight: 700; direction: ltr; margin-top: 2px; }
+.p.next { background: #b98f45; border-color: transparent; }
+.p.next .n, .p.next .t { color: #14110b; }
+.p.past { opacity: 0.45; }
+.countdown { margin-top: 12px; font-size: 28px; }
+.countdown b { color: #c9a35a; direction: ltr; display: inline-block; }
+
+.dhikr { position: absolute; left: 96px; right: 96px; top: 640px; height: 120px; text-align: center; font-family: 'Amiri', serif; font-size: 46px; line-height: 1.45; color: #f6efe1; overflow: hidden; transition: opacity 0.8s; }
+.dhikr small { display: block; font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 22px; color: #a59c8b; }
+.ticker { position: absolute; left: 96px; right: 96px; top: 772px; height: 40px; font-size: 24px; color: #cfc6b4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: opacity 0.6s; }
+.ticker b { color: #c9a35a; font-weight: 500; margin-left: 12px; }
+
+.apps-wrap { position: absolute; left: 76px; right: 76px; bottom: 40px; height: 210px; overflow: hidden; }
+.apps { position: absolute; right: 20px; top: 16px; white-space: nowrap; transition: right 0.2s; }
+.app {
+  display: inline-block; vertical-align: top; width: 196px; height: 168px; margin-left: 18px; border-radius: 24px;
+  background: rgba(255,255,255,0.05); border: 3px solid rgba(239,230,212,0.08); text-align: center; padding-top: 30px;
+  font-size: 26px; color: #efe6d4; white-space: normal;
+}
+.app svg { width: 54px; height: 54px; display: block; margin: 0 auto 14px; }
+
+/* ---------- focus (shared) ---------- */
+.f { outline: none; transition: transform 0.12s, background 0.12s, border-color 0.12s; }
+.f.focus { background: rgba(201,163,90,0.20); border-color: #c9a35a; transform: scale(1.04); -webkit-transform: scale(1.04); }
+
+/* ---------- section screens ---------- */
+.head { display: flex; align-items: baseline; gap: 28px; margin-bottom: 30px; }
+.h-title { font-size: 60px; font-weight: 700; color: #f6efe1; }
+.h-sub { font-size: 26px; color: #a59c8b; }
+.scroll { position: absolute; left: 76px; right: 76px; top: 160px; bottom: 40px; overflow: hidden; }
+.scroll-in { position: relative; transition: top 0.2s; top: 0; padding: 12px 20px; }
+
+.card {
+  display: inline-block; vertical-align: top; width: 392px; height: 150px; margin: 0 0 22px 22px; border-radius: 22px;
+  background: rgba(255,255,255,0.05); border: 3px solid rgba(239,230,212,0.08); padding: 22px 26px; overflow: hidden;
+}
+.card .c-name { font-size: 30px; font-weight: 500; color: #f6efe1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card .c-sub { font-size: 22px; color: #a59c8b; margin-top: 8px; }
+.card.playing { background: rgba(14,90,70,0.45); border-color: #2f8f6f; }
+.card.playing .c-sub { color: #9fdcc4; }
+.card .logo { height: 60px; max-width: 160px; display: block; margin-bottom: 10px; }
+.card.ch { height: 170px; }
+
+.np-bar { position: absolute; left: 96px; right: 96px; bottom: 30px; height: 0; }
+
+.row { display: block; padding: 22px 30px; margin-bottom: 14px; border-radius: 18px; background: rgba(255,255,255,0.04); border: 3px solid rgba(239,230,212,0.06); }
+.row .r-t { font-size: 34px; line-height: 1.45; color: #f6efe1; }
+.row .r-s { font-size: 22px; color: #c9a35a; margin-top: 4px; }
+
+/* ---------- photos ---------- */
+#s-photos { padding: 0; background: #000; }
+.ph { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.6s; }
+.ph.show { opacity: 1; }
+.ph-shade { position: absolute; left: 0; right: 0; bottom: 0; height: 360px; background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.75)); }
+.ph-clock { position: absolute; right: 96px; bottom: 70px; font-size: 120px; font-weight: 700; direction: ltr; color: #fff; line-height: 1; }
+.ph-clock small { display: block; font-size: 30px; font-weight: 400; direction: rtl; text-align: right; color: #e8dfcc; margin-top: 12px; }
+.ph-credit { position: absolute; left: 96px; bottom: 40px; font-size: 18px; color: rgba(255,255,255,0.65); direction: ltr; text-align: left; max-width: 900px; }
+
+/* ---------- player ---------- */
+#s-player { padding: 0; background: #000; }
+#video { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background: #000; }
+.pl-info { position: absolute; right: 60px; top: 50px; padding: 18px 30px; border-radius: 18px; background: rgba(0,0,0,0.65); font-size: 34px; transition: opacity 0.5s; }
+.pl-info small { display: block; font-size: 20px; color: #bbb; margin-top: 4px; }
+
+/* ---------- adhan + toast ---------- */
+.overlay { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: none; text-align: center; padding-top: 270px;
+  background: radial-gradient(1000px 700px at 50% 40%, rgba(185,143,69,0.35), rgba(0,0,0,0) 70%), #0b0a08; }
+.overlay.on { display: block; }
+.ad-small { font-size: 44px; color: #c9a35a; }
+.ad-name { font-family: 'Amiri', serif; font-size: 150px; line-height: 1.3; color: #f6efe1; }
+.ad-time { font-size: 70px; font-weight: 700; direction: ltr; color: #c9a35a; }
+.ad-hint { font-size: 26px; color: #a59c8b; margin-top: 60px; }
+.ad-credit { position: absolute; left: 0; right: 0; bottom: 30px; font-size: 18px; color: #6f675a; direction: ltr; }
+.toast { position: absolute; left: 50%; top: 40px; width: 900px; margin-left: -450px; padding: 22px 30px; border-radius: 20px; text-align: center;
+  background: rgba(20,17,11,0.92); border: 2px solid #c9a35a; font-size: 30px; display: none; }
+.toast.on { display: block; }

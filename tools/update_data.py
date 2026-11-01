@@ -97,7 +97,7 @@ TOP_RECITERS = [
 def build_radios():
     try:
         d = json.loads(get("https://mp3quran.net/api/v3/radios?language=ar"))
-        radios = [{"name": r["name"].strip(), "url": r["url"].strip()} for r in d.get("radios", []) if r.get("url")]
+        radios = [{"name": r["name"].strip(), "url": r["url"].strip()} for r in d.get("radios", []) if r.get("url") and "ترجمة" not in r.get("name", "")]
 
         def rank(r):
             for i, k in enumerate(TOP_RECITERS):

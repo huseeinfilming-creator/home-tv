@@ -5,59 +5,74 @@
 <meta name="viewport" content="width=1920, initial-scale=1">
 <title>شاشة البيت</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Readex+Pro:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 <div class="stage" id="stage">
 
+  <!-- background photography (home + photos + adhan) -->
+  <div class="bg" id="bg"><div class="bg-img" id="bg-a"></div><div class="bg-img" id="bg-b"></div><div class="bg-shade" id="bg-shade"></div></div>
+
   <!-- ================= HOME ================= -->
   <section class="screen on" id="s-home">
-    <div class="top">
-      <div class="clock-wrap">
-        <div class="greet" id="greet">أهلاً بالبيت</div>
-        <div class="clock" id="clock">--:--</div>
-        <div class="dates"><span id="hijri"></span><span id="greg"></span></div>
+    <div class="h-top">
+      <div class="when">
+        <div class="hijri" id="hijri"></div>
+        <div class="greg" id="greg"></div>
       </div>
-      <div class="side">
-        <div class="weather">
-          <div class="temp" id="temp">--°</div>
-          <div class="desc" id="wdesc"> </div>
-          <div class="city">إسطنبول</div>
-        </div>
+      <div class="sky">
+        <div class="temp" id="temp"></div>
+        <div class="wdesc" id="wdesc"></div>
         <div class="np" id="np-home"></div>
       </div>
     </div>
-    <div class="prayers" id="prayers"></div>
-    <div class="countdown" id="countdown"></div>
+
+    <div class="time">
+      <div class="clock" id="clock"><span class="hh">--</span><span class="colon">:</span><span class="mm">--</span></div>
+      <div class="until" id="until"></div>
+    </div>
+
+    <div class="day" id="day">
+      <svg class="arc" viewBox="0 0 1728 210" preserveAspectRatio="none">
+        <polyline id="arc-future" class="arc-future" points=""/>
+        <polyline id="arc-past" class="arc-past" points=""/>
+      </svg>
+      <div class="sun" id="sun"></div>
+      <div id="marks"></div>
+    </div>
+
     <div class="dhikr" id="dhikr"></div>
-    <div class="ticker" id="ticker"></div>
-    <div class="apps-wrap"><div class="apps" id="apps"></div></div>
+
+    <div class="dock-wrap"><div class="dock" id="dock"></div></div>
   </section>
 
   <!-- ================= QURAN ================= -->
   <section class="screen" id="s-quran">
-    <div class="head"><div class="h-title">القرآن الكريم</div><div class="h-sub">إذاعات مباشرة على مدار الساعة · OK للتشغيل والإيقاف</div></div>
-    <div class="scroll" id="quran-list"></div>
-    <div class="np-bar" id="np-quran"></div>
+    <div class="listen">
+      <div class="l-state" id="q-state">اختار قارئ من القائمة</div>
+      <div class="l-name" id="q-name">القرآن الكريم</div>
+      <div class="l-sub" id="q-sub">إذاعات مباشرة على مدار الساعة</div>
+      <div class="eq" id="q-eq"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="l-hint">OK للتشغيل أو الإيقاف · رجوع للرئيسية</div>
+    </div>
+    <div class="q-list"><div class="scroll-in" id="quran-list"></div></div>
   </section>
 
   <!-- ================= LIVE ================= -->
   <section class="screen" id="s-live">
-    <div class="head"><div class="h-title">قنوات مباشرة</div><div class="h-sub">قنوات مجانية · بعضها ممكن ما يشتغل حسب البلد</div></div>
-    <div class="scroll" id="live-list"></div>
+    <div class="s-head"><h1>قنوات مباشرة</h1><p>بعض القنوات ممكن ما تشتغل حسب البلد</p></div>
+    <div class="s-body"><div class="scroll-in" id="live-list"></div></div>
   </section>
 
   <!-- ================= NEWS / SPORTS ================= -->
   <section class="screen" id="s-news">
-    <div class="head"><div class="h-title" id="news-title">الأخبار</div><div class="h-sub" id="news-sub"></div></div>
-    <div class="scroll" id="news-list"></div>
+    <div class="s-head"><h1 id="news-title">الأخبار</h1><p id="news-sub"></p></div>
+    <div class="s-body"><div class="scroll-in" id="news-list"></div></div>
   </section>
 
   <!-- ================= PHOTOS / SCREENSAVER ================= -->
   <section class="screen" id="s-photos">
-    <div class="ph" id="ph-a"></div><div class="ph" id="ph-b"></div>
-    <div class="ph-shade"></div>
     <div class="ph-clock" id="ph-clock"></div>
     <div class="ph-credit" id="ph-credit"></div>
   </section>
@@ -69,9 +84,10 @@
   </section>
 
   <!-- ================= ADHAN ================= -->
-  <div class="overlay" id="adhan">
+  <div class="adhan" id="adhan">
+    <div class="ad-ring"></div>
     <div class="ad-small">حان الآن موعد</div>
-    <div class="ad-name" id="ad-name">أذان الظهر</div>
+    <div class="ad-name" id="ad-name"></div>
     <div class="ad-time" id="ad-time"></div>
     <div class="ad-hint">أي زر لإيقاف الأذان</div>
     <div class="ad-credit" id="ad-credit"></div>
@@ -79,6 +95,6 @@
   <div class="toast" id="toast"></div>
 </div>
 
-<script src="app.js?v=3"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>

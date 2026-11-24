@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T21:22:51Z",
+ "updated": "2026-11-24T06:01:38Z",
  "items": [
   {
    "name": "Al Jazeera 2",
@@ -220,15 +220,27 @@
    "flags": []
   },
   {
-   "name": "Rotana Radio Jordan Studio",
-   "url": "http://45.63.116.205/hls/stream1.m3u8",
-   "logo": "https://i.imgur.com/xGDjlp5.png",
+   "name": "Rotana Cinema KSA",
+   "url": "https://r.eu.cdn-redge.media/livehls/oeu/mt/live/rotana_cinema/live.livx/playlist.m3u8",
+   "logo": "https://i.imgur.com/pGgp38I.png",
    "flags": []
   },
   {
-   "name": "Rotana Tarab Jordan City View",
-   "url": "http://45.63.116.205/hls3/stream1.m3u8",
-   "logo": "https://i.imgur.com/NjgOBts.png",
+   "name": "Rotana Classic",
+   "url": "https://r.eu.cdn-redge.media/livehls/oeu/mt/live/rotana_classic/live.livx/playlist.m3u8",
+   "logo": "https://i.imgur.com/pMMUvkt.png",
+   "flags": []
+  },
+  {
+   "name": "Rotana Clip",
+   "url": "https://r.eu.cdn-redge.media/livehls/oeu/mt/live/rotana_clip/live.livx/playlist.m3u8",
+   "logo": "https://i.imgur.com/nhREk0o.png",
+   "flags": []
+  },
+  {
+   "name": "Rotana Music",
+   "url": "https://r.eu.cdn-redge.media/livehls/oeu/mt/live/rotana_music/live.livx/playlist.m3u8",
+   "logo": "https://i.imgur.com/2zFQbQi.png",
    "flags": []
   }
  ]
